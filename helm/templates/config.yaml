@@ -4,4 +4,4 @@ metadata:
   name: special-config
   namespace: default
 data:
-    OPTION: BBBBB2
+    OPTION: BBBBB222
