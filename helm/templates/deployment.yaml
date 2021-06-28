@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website
+  labels:
+    app: website
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: website
+  template:
+    spec:
+      serviceAccountName: internal-app
+      containers:
+        - name: test
+          image: ubuntu:latest
+          envFrom:
+          - configMapRef:
+              name: special-config
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+
+    metadata:
+      labels:
+        app: website
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+        {{- toYaml .Values.secret | nindent 8 }}
