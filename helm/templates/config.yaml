@@ -1,7 +1,146 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: special-config
+  name: bpapiEsb
   namespace: default
-data:
-    OPTION: BBBBB2222
+bpapiEsb.cfg: |
+bpapiEsb.defaultMaxConnectionsPerHost = 500
+bpapiEsb.maxTotalConnections = 50000
+bpapiEsb.soTimeout = 50000
+
+bpapiEsb.wssEnabled=true
+bpapiEsb.wssEnabledPoczta=true
+bpapiEsb.wssPocztaActions=Timestamp UsernameToken Signature
+bpapiEsb.wssPocztaActionsBasic=Timestamp UsernameToken
+
+bpapiEsb.wss.credentials.filename = bpapi.credentials
+bpapiEsb.wss.credentials.directory = ${karaf.base}/etc/conf_esb
+bpapiEsb.wss.policies.directory = ${karaf.base}/etc/conf_esb/policies
+
+#weryfikacja podpisu dla response loplg
+bpapiEsb.wssResponseAuthLoplgEnabled=true
+bpapiEsb.wssLoplgActions=Signature
+#weryfikacja podpisu dla response rbr
+bpapiEsb.wssRBRActions=Signature
+bpapiEsb.wssResponseAuthRBREnabled=true
+
+
+bpapiEsb.giroNrb = 17132015375555555520000009
+bpapiEsb.giroTypProd = RT17-000002
+
+bpapiEsb.doladowania.serviceNumber=13201120
+
+bpapiEsb.wnioski.bankSymbols = BPO|BPO2|NU
+
+bpapiEsb.przelewy.bpKodWewnetrzny = 1320
+
+bpapiEsb.cacheMWStatusMaxTTL = 300
+bpapiEsb.loggingIgnoredRequests = WydrukRachunekWyciag_GetRs;WydrukSzablonu_GetRs;WydrukRachunekHistoria_GetRs
+bpapiEsb.FeRepository.SendDocumentToRepository.CompanySymbol = BPO
+bpapiEsb.FeRepository.SendDocumentToRepository.SystemSymbol = FerrytFlow
+
+bpapiEsb.poczta.produktyppklienta.max.umow = 10
+bpapiEsb.poczta.poczta_anulowanie = TAK
+bpapiEsb.middleware.transakcja.typeMap=42:681,43:684,51:683,55:682,30:610,54:611,27:612,120:613,44:684,45:684,46:684,196:610
+bpapiEsb.middleware.transakcjaValue.typ=1:PRZELEW_WYCHODZACY,2:PRZELEW_WYCHODZACY,3:PLATNOSC_US,4:PLATNOSC_ZUS,28:PRZELEW_WLASNY,37:PRZELEW_WYCHODZACY,73:PRZELEW_SORBNET,128:DOLADOWANIE_TELEFONU,169:PRZELEW_NATYCHMIASTOWY,5101:ZLECENIE_STALE,5201:PRZELEW_WYCHODZACY,5301:PRZELEW_WYCHODZACY,5401:PLATNOSC_ZUS,5402:PLATNOSC_US,69:PRZELEW_SEPA
+bpapiEsb.middleware.obslugaStatusuVerify=SAFE
+bpapiEsb.middleware.obslugaStatusuBlik=BI,EVBI,EVBM,IVR
+bpapiEsb.middleware.obslugaStatusuTransakcjiBlik=Completed
+
+#Konfiguracja parametrow dla KredytOnline
+bpapiEsb.kredytonline.serviceName = BPO
+bpapiEsb.kredytonline.bankSymbol = BPO2
+bpapiEsb.kredytonline.produktSymbol = COL
+bpapiEsb.kredytonline.scenarioSymbol = COL
+bpapiEsb.kredytonline.actionSymbol.zbadaniezdolnosci = Nic1
+bpapiEsb.kredytonline.actionSymbol.weryfikujklienta = I1__WeryfikujKlienta
+bpapiEsb.kredytonline.actionSymbol.weryfikacjabik = PrzekazDalej_1
+bpapiEsb.kredytonline.actionSymbol.rejestrujkredyt = PrzekazDalej_1
+bpapiEsb.kredytonline.actionSymbol.uruchomkredyt = PrzekazDalej_1
+
+#Ustawienia redelivery potrzebnego dla ponawiania wnioskow
+bpapiEsb.kredytonline.sprawdzanieWnioskuIlosc = 18
+bpapiEsb.kredytonline.sprawdzenieWnioskuInterwal = 10000
+bpapiEsb.kredytonline.sprawdzenieWnioskuCzas = 180000
+
+bpapiEsb.kredytonline.symbolPolaKlientDane = WND_DANE_Z_WNIOSKU
+bpapiEsb.kredytonline.symbolPolaKlientDochody = WND_DOCHODY
+bpapiEsb.kredytonline.symbolPolaKlientZobowiazania = WND_ZOBOWIAZANIA
+bpapiEsb.kredytonline.symbolPolaKlientOswiadczenia = WND_OSWIADCZENIA
+bpapiEsb.kredytonline.symbolPolaWyplataSplata = WND_WYPLATA_SPLATA
+bpapiEsb.kredytonline.symbolPolaParametryOferty = WND_PARAMETRY_OFERTY
+bpapiEsb.kredytonline.symbolPolaSrodowisko = WND_SRODOWISKO
+bpapiEsb.kredytonline.symbolPolaAntyfraud = WND_ANTYFRAUD
+bpapiEsb.kredytonline.symbolPolaAkceptacja = WND_AKCEPTACJA
+
+#kredytonline symbol akcji
+bpapiEsb.kredytonline.symbolAkcjiWeryfikujWnioskiWToku = I1__WeryfikujWnioskiWToku
+bpapiEsb.kredytonline.symbolAkcjiWeryfikacjaSMSKod = I2__WeryfikacjaSMSKod
+bpapiEsb.kredytonline.symbolAkcjiWeryfikacjaAntyfraud = I3__WeryfikacjaAntyfraud
+bpapiEsb.kredytonline.symbolAkcjiWeryfikujKlienta = I4__WeryfikujKlienta
+bpapiEsb.kredytonline.symbolAkcjiRejestrujKredyt = I5__RejestrujKredyt
+bpapiEsb.kredytonline.symbolAkcjiUruchomKredyt = I6__UruchomKredyt
+bpapiEsb.kredytonline.symbolAkcjiWyznaczParametryKredytu = I7__WyznaczParametryKredytu
+
+#bpapiEsb.kredytonline.symbolAkcjiWeryfikacjaBIK = I3__WeryfikujBIK
+#bpapiEsb.kredytonline.symbolAkcjiZbadanieZdolnosci = I2__ZbadajZdolnosc
+#bpapiEsb.kredytonline.symbolAkcjiWyplataKredytu = I5__WyplacKredyt
+#
+#do usuniecia ostatnia
+
+bpapiEsb.ScoringSoTimeout=300000
+
+bpapiEsb.SMSP24Aktywny=true
+
+#ustawienia środowiska kiru
+#możliwe wartości stanu to OK oraz BRAK_OBSLUGI
+bpapiEsb.STAN_KIR  = OK
+bpapiEsb.KOMENTARZ = BRAK_OBSLUGI
+
+bpapiEsb.ods = true
+bpapiEsb.przelewy.WeryfikujPlatnosc_Get.InterwalCzasowy = 730
+bpapiEsb.przelewy.WeryfikujPlatnosc_Get.Tolerancja = 10
+bpapiEsb.przelewy.WeryfikujPlatnosc_Get.RachunekBlueMedia = 85132011202463963120000015
+bpapiEsb.kalendarz.lagOperacji = 200
+bpapiEsb.kalendarz.defaultGGLag = 20
+
+#ustawienia środowiska kiru
+#możliwe wartości stanu to OK oraz BRAK_OBSLUGI
+bpapiEsb.STAN_KIR  = OK
+bpapiEsb.KOMENTARZ = Srodowisko KIR niedostepne
+
+bpapiEsb.umowyklienta.wykluczone_umowy=PREPAID.ZASILACZ,PREPAID.DETAL
+bpapiEsb.umowyklienta.wykluczone_umowyWEW
+bpapiEsb.umowyklienta.wykluczone_umowyPOCZTA=PREPAID,R_RODZICOW,RACH_SPL_KR,RACH_SPL_DOP,ROR_WALUTOWY,SKO,RB_DLA_LOKAT,KZP
+bpapiEsb.umowyklienta.wykluczone_umowyHB
+bpapiEsb.umowyklienta.wykluczone_umowyWWW=GIRO.K_ENVELO,GIRO_ENV_KO.ENVELO_KO,BIZNES GIRO.FIRMOWE ENV,GIRO_EN_KO_B.KO_EVN_BIZ,PREPAID.ZASILACZ,RACH_SPL_KR,RACH_SPL_DOP,ROR_AVISTA,KORPO_AVISTA,PKF_AVISTA
+bpapiEsb.umowyklienta.wykluczone_umowyCAL
+bpapiEsb.umowyklienta.wykluczone_umowyIVR
+bpapiEsb.umowyklienta.wykluczone_umowySMS
+bpapiEsb.umowyklienta.wykluczone_umowyEBI=BIZ_GIRO_POD,GIRO_FKO_POD,GIRO_KO_P,KORPO_AVISTA,PKF_AVISTA,PORTO GIRO,POWIERNICZY,PREPAID,RACH_SPL_KR,RACH_SPL_DOP,RB_DLA_LOKAT,ROR_AVISTA,ROR_WALUTOWY,SGW,TECHN_KONSOR,TECHNICZNY2,TECHNICZNY3,ZWROT_PODATK,BIZNES GIRO.EKSPERT_DEWI,BIZNES GIRO.BIZNES_DEWIZ,GIRO.PK_PP
+bpapiEsb.umowyklienta.wykluczone_umowyEBM=BIZ_GIRO_POD,GIRO_FKO_POD,GIRO_KO_P,KORPO_AVISTA,PKF_AVISTA,PORTO GIRO,POWIERNICZY,PREPAID,RACH_SPL_KR,RACH_SPL_DOP,RB_DLA_LOKAT,ROR_AVISTA,ROR_WALUTOWY,SGW,TECHN_KONSOR,TECHNICZNY2,TECHNICZNY3,ZWROT_PODATK,BIZNES GIRO.EKSPERT_DEWI,BIZNES GIRO.BIZNES_DEWIZ,GIRO.PK_PP
+
+#zmiana Q2
+
+#bpapiEsb.lokataWalAdd.wyslijSMSLokataWALAdd = false
+bpapiEsb.rbr.certRequired = true
+
+
+bpapiEsb.przelewy.WeryfikacjaPrzelewWlasny = BI,EVBI,EVBM,IVR
+bpapiEsb.email.whiteList = k.gruca@pocztowy.pl,m.lange@pocztowy.pl,t.matyszkiewicz@pocztowy.pl,k.dobrzyniak@pocztowy.pl,m.sederowski@pocztowy.pl,r.urbaniak@pocztowy.pl,m.kuczewski@pocztowy.pl,p.blaszczak@pocztowy.pl,R.Zajner@pocztowy.pl,Kamila.Kacprzak@pocztowy.pl,j.skrzypczak@pocztowy.pl,m.tkaczyk@pocztowy.pl,m.kocik@pocztowy.pl,k.korszla@pocztowy.pl,d.ches@pocztowy.pl,j.frelichowska@pocztowy.pl,a.radziejewska@pocztowy.pl,s.oczachowski@pocztowy.pl,k.usiadek@pocztowy.pl,m.jaskulski@pocztowy.pl,l.zawadzka@pocztowy.pl,m.dzieciol@pocztowy.pl,l.parkot@pocztowy.pl,d.witkowski@pocztowy.pl,k.ertner-saczuk@pocztowy.pl,m.bes-dluzej@pocztowy.pl,c.mroczkowski@pocztowy.pl,m.wiecier@pocztowy.pl,m.grzybowska@pocztowy.pl,p.jakubowski@pocztowy.pl,e.plocharska@pocztowy.pl,m.rosol@pocztowy.pl,k.jastrzebska@pocztowy.pl,p.chleborowicz@pocztowy.pl,p.wojtasik@pocztowy.pl,a.dobucki@pocztowy.pl,m.pekowski@pocztowy.pl,e.suchomska@pocztowy.pl,s.szybowicz@pocztowy.pl,mariusz.sendrowicz@pocztowy.pl,w.szmulta@pocztowy.pl,l.slawinski@pocztowy.pl,k.kidacka@pocztowy.pl,j.dabrowska@pocztowy.pl,e.poznanska@pocztowy.pl,a.gwit@pocztowy.pl,t.urbaczewski@pocztowy.pl,k.szarwinska@pocztowy.pl,k.kaczynska@pocztowy.pl,K.Osieczonek@centrumoperacyjne.pl,m.mruczkowska@pocztowy.pl,P.Celebucki@pocztowy.pl,p.rudzinska@pocztowy.pl,a.mankowska@pocztowy.pl,m.pieklarz@pocztowy.pl,p.kacprzyk@pocztowy.pl,A.Lorkowska-Kunath@pocztowy.pl,S.Oczachowski@pocztowy.pl,M.Miller@pocztowy.pl,M.Rzadkowski@pocztowy.pl,T.Korczynski@pocztowy.pl,k.oginski@pocztowy.pl,jakub.darecki@securitum.pl,b.niedzwiedz@pocztowy.pl,M.Debicki@pocztowy.pl,A.Hayder@pocztowy.pl,A.Krasniewicz@pocztowy.pl,M.Dynakowska@pocztowy.pl,S.Smargol@pocztowy.pl,J.Medrek@pocztowy.pl,Cross-sell@pocztowy.pl,cross-sell@pocztowy.pl,s.nadolska@pocztowy.pl,a.usiadek@pocztowy.pl,j.dembinska@pocztowy.pl,ewelina.pawlak@pocztowy.pl,m.wrobel@pocztowy.pl,a.kaczorowska@pocztowy.pl,f.ledzion@pocztowy.pl,h.merda@pocztowy.pl,b.pawlik@pocztowy.pl,Joanna.Pankowska@pocztowy.pl,j.bujalska@pocztowy.pl,I.Kosiol@pocztowy.pl,K.Oginski@pocztowy.pl,p.celebucki@pocztowy.pl,a.krasniewicz@pocztowy.pl,D.Chmurska@pocztowy.pl,d.chmurska@pocztowy.pl,j.slizewski@pocztowy.pl,J.Slizewski@pocztowy.pl,w.slowakiewicz@pocztowy.pl,W.Slowakiewicz@pocztowy.pl,a.danik@onet.pl,c.boguski@pocztowy.pl,d.moskal@pocztowy.pl,Malgorzata.Nowak@pocztowy.pl,d.szczepanik@pocztowy.pl,sekcjaenvelo@gmail.com,a.witkowska@pocztowy.pl,p.kosmowski@pocztowy.pl,m.sederowski@pocztowy.pl,k.siekierski@pocztowy.pl,a.kowalczyk@pocztowy.pl,m.majdzinska@pocztowy.pl,l.maderak@pocztowy.pl,j.jarysz@pocztowy.pl,b.wrona@pocztowy.pl,a.jeziorski@pocztowy.pl,p.szpilarski@pocztowy.pl,m.bedczak@pocztowy.pl,a.szara@pocztowy.pl,K.Nalezyta@pocztowy.pl,g.gornik@pocztowy.pl,Joanna.Rosloniec@poczta-polska.pl,katarzyna.rybak@poczta-polska.pl,dorota.ciszewska@poczta-polska.pl,j.pajak-gawlowska@pocztowy.pl,E.Korniluk@pocztowy.pl,K.Knap@pocztowy.pl,m.kowalik@pocztowy.pl,p.jackowski@pocztowy.pl,sekcjatestowdbc@pocztowy.pl,p.rosol@pocztowy.pl,m.suchinski@pocztowy.pl,n.koj@pocztowy.pl,M.Supera@pocztowy.pl,r.slawinski@pocztowy.pl,K.Dobrowolska@pocztowy.pl,L.Zalewski@pocztowy.pl,zalewiasty@gmail.com,mariusz.gorzen@gmail.com,justyna_pajak@wp.pl,ewelina.dolega@gmail.com,malgorzatamierzwa91@gmail.com,annawojewoda74@gmail.com,magdalenawalentynowicz@wp.pl,paulina.szczepanska0195@gmail.com,paulina.dziubczynska@wp.pl,robert.pinkert97@gmail.com,l.pilorz@ratels.pl,a.pajdo@ratels.pl,b.pokrzywinski@ratels.pl,bzdabrowska@gmail.com,krzysiek93.g@gmail.com,bielickiwojtek@gmail.com,vnagov@gmail.com,truskaweczka1978@wp.pl,malgorzata.donczyk@gmail.com,brzyckad@interia.eu,achulec82@wp.pl,claudia.rekowska@gmail.com,krupek3085@gmail.com,a.szara92@gmail.com,dzkinga@gmail.com,l.brach@pocztowy.pl,brzyckad@interia.eu,achulec82@wp.pl,a.wajler@pocztowy.pl,J.Pazderska@pocztowy.pl,p.ciurzynski@theheart.tech,k.osmialowska@pocztowy.pl,m.mazurek@pocztowy.pl,a.baranska@pocztowy.pl,M.Glazek-Basak@pocztowy.pl
+
+
+bpapiEsb.lokata.wyslijSMSLokata=true
+bpapiEsb.lokata.wyslijSMSLokataczas=60
+bpapiEsb.lokata.wyslijSMSLokatapetl=5
+
+bpapiEsb.securityProcessor.noTimestampEndpoints=ferrytApi,smsgw-ws,emailService,pull-web-services,smsmo-ws,zbp,migdzdev1,sso-frontend,smsService,ods,push,calendar,Invoice,invoice,Sledzenie,QueryPESEL,QueryRDO,sgw,cardService,quantum
+bpapiEsb.securityProcessor.systemsWithNonce=IMPAQGROUP,BIZBCB2
+
+bpapiEsb.setChannelBasedOnSystemProcessor=BI:WWW,EVBI:EBI,EVBM:EBM,EVCA:EBI,CKPON:POCZTA
+
+bpapiEsb.przelewy.tytul99znakowBlueMedia=true
+
+bpapiEsb.grupaPowiazanych.soTimeout = 290000
+
+bpapiEsb.OperacjeHistoriaLista.NIKRole=POSIADACZ,PELNOMOCNIK,UPOWAZNIONY,UZYTKOWNIK,WLASCICIEL_FIRMY,ZARZADCA_SUKCESYJNY,PRZEDSTAWICIEL_USTAWOWY

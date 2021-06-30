@@ -15,12 +15,19 @@ spec:
       containers:
         - name: test
           image: ubuntu:latest
-          envFrom:
-          - configMapRef:
-              name: special-config
+          volumeMounts:
+          - name: bpapiEsb
+            mountPath: /conf/bpapiEsb.conf
+            subPath: bpapiEsb.conf
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
-
+      volumes:
+      - name: bpapiEsb
+        configMap:
+          name: bpapiEsb
+          items:
+            - key: bpapiEsb.conf
+              path: bpapiEsb.conf
     metadata:
       labels:
         app: website

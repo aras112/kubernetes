@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook
+  name: app-qa
   # You'll usually want to add your resources to the argocd namespace.
-  namespace: default
+  namespace: qa
   # Add a this finalizer ONLY if you want these to cascade delete.
 spec:
   # The project the application belongs to.
-  project: default
+  project: qa
   destination:
-    namespace: default
+    namespace: qa
     server: https://kubernetes.default.svc
   # Source of the application manifests
   source:
     repoURL: https://github.com/aras112/kubernetes.git
     path: helm/
     # repoURL: https://github.com/argoproj/argocd-example-apps.git
-    targetRevision: HEAD
+    targetRevision: qa
   syncPolicy:
     automated:
       prune: true
