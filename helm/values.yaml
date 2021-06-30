@@ -3,15 +3,19 @@ secret:
   vault.hashicorp.com/role: 'qa'
   vault.hashicorp.com/agent-inject-secret-bir.cfg: 'qa/connections/bir'
   vault.hashicorp.com/agent-inject-template-bir.cfg: |
+    # Creation time: .Data.metadata.created_time
+    # Version: .Data.metadata.version
     {{ with secret "qa/connections/bir" }}
-      {{ range $k, $v := .Data }}
+      {{ range $k, $v := .Data.data }}
           {{ $k }}={{ $v }}
       {{ end }}
     {{- end }}
   vault.hashicorp.com/agent-inject-secret-kir.cfg: 'qa/connections/kir'
   vault.hashicorp.com/agent-inject-template-kir.cfg: |
+    # Creation time: .Data.metadata.created_time
+    # Version: .Data.metadata.version
     {{ with secret "qa/connections/kir" }}
-      {{ range $k, $v := .Data }}
+      {{ range $k, $v := .Data.data }}
           {{ $k }}={{ $v }}
       {{ end }}
     {{- end }}
