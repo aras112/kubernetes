@@ -1,8 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: bpapiEsb
-  namespace: default
+  name: bpapi-esb
 data:
   bpapiEsb.cfg: |
       bpapiEsb.defaultMaxConnectionsPerHost = 500

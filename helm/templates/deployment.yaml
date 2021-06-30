@@ -16,15 +16,15 @@ spec:
         - name: test
           image: ubuntu:latest
           volumeMounts:
-          - name: bpapiEsb
+          - name: bpapi-esb
             mountPath: /conf/bpapiEsb.conf
             subPath: bpapiEsb.conf
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
       volumes:
-      - name: bpapiEsb
+      - name: bpapi-esb
         configMap:
-          name: bpapiEsb
+          name: bpapi-esb
           items:
             - key: bpapiEsb.conf
               path: bpapiEsb.conf
