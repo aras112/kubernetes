@@ -16,7 +16,7 @@ spec:
     repoURL: https://github.com/aras112/kubernetes.git
     path: helm/
     # repoURL: https://github.com/argoproj/argocd-example-apps.git
-    targetRevision: qa
+    targetRevision: master
   syncPolicy:
     automated:
       prune: true
