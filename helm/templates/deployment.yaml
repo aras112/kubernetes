@@ -6,7 +6,7 @@ metadata:
     app: website
 spec:
   replicas: 1
-  selector:
+  selector:s
     matchLabels:
       app: website
   template:
@@ -15,23 +15,18 @@ spec:
         - name: test
           image: ubuntu:latest
           volumeMounts:
-          - name: bpapi-esb
-            mountPath: /conf
-          - name: card-list
+          - name: conf
             mountPath: /conf
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
       volumes:
-        - name: bpapi-esb
-          configMap:
-            # Provide the name of the ConfigMap containing the files you want
-            # to add to the container
-            name: bpapi-esb
-        - name: card-list
-          configMap:
-            # Provide the name of the ConfigMap containing the files you want
-            # to add to the container
-            name: card-list
+        - name: conf
+          projected:
+            sources:
+            - configMap:
+                name: bpapi-esb
+            - configMap:
+                name: card-list
     metadata:
       labels:
         app: website
