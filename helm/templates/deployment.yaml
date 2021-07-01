@@ -16,11 +16,9 @@ spec:
           image: ubuntu:latest
           volumeMounts:
           - name: bpapi-esb
-            mountPath: /conf/bpapiEsb.conf
-            subPath: bpapiEsb.conf
+            mountPath: /conf
           - name: card-list
-            mountPath: /conf/card_list.conf
-            subPath: card_list.conf
+            mountPath: /conf
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
       volumes:
