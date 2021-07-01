@@ -21,12 +21,11 @@ spec:
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
       volumes:
-      - name: bpapi-esb
-        configMap:
-          name: bpapi-esb
-          items:
-            - key: bpapiEsb.conf
-              path: bpapiEsb.conf
+        - name: bpapi-esb
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            # to add to the container
+            name: bpapi-esb
     metadata:
       labels:
         app: website
