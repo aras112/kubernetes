@@ -7,7 +7,7 @@ metadata:
   # Add a this finalizer ONLY if you want these to cascade delete.
 spec:
   # The project the application belongs to.
-  project: qa
+  project: default
   destination:
     namespace: qa
     server: https://kubernetes.default.svc
