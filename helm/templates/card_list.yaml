@@ -9,7 +9,7 @@ data:
       card_list.defbank.karta_kredyt.kody_limitow=LICZ_DZ_OPER_GOT,WART_DZ_OPER_GOT,MAX_WART_OPER_ZBLIZ
 
       #Kody produktów kartowych do trybu online FDP
-      card_list.defbank.karta_debet.fdp.online.visa=EN,UN,KE,ZK,MN,ZM,GF,TF,EV
+      card_list.defbank.karta_debet.fdp.online.visa=EN,UN,KE,ZK,MN,ZM,GF,TF,EV,PM
       card_list.defbank.karta_debet.fdp.online.mastercard=F1,DM,PM
       card_list.defbank.karta_kredyt.fdp.online.visa=
       card_list.defbank.karta_kredyt.fdp.online.mastercard=CR
