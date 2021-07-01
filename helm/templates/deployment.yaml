@@ -18,6 +18,9 @@ spec:
           - name: bpapi-esb
             mountPath: /conf/bpapiEsb.conf
             subPath: bpapiEsb.conf
+          - name: card-list
+            mountPath: /conf/card_list.conf
+            subPath: card_list.conf
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
       volumes:
@@ -26,6 +29,11 @@ spec:
             # Provide the name of the ConfigMap containing the files you want
             # to add to the container
             name: bpapi-esb
+        - name: card-list
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            # to add to the container
+            name: card-list
     metadata:
       labels:
         app: website

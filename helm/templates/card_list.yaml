@@ -1,0 +1,23 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: card-list
+data:
+  cardList.cfg: |
+      #Limity przed połączeniem z CA
+      card_list.defbank.karta_debet.kody_limitow=LIMIT_DZIENNY_KARTY,LICZ_DZ_OPER_GOT,LICZ_DZ_OPER_ALL,MAX_WART_OPER_ZBLIZ,MAX_WART_OPER_CBACK
+      card_list.defbank.karta_kredyt.kody_limitow=LICZ_DZ_OPER_GOT,WART_DZ_OPER_GOT,MAX_WART_OPER_ZBLIZ
+
+      #Kody produktów kartowych do trybu online FDP
+      card_list.defbank.karta_debet.fdp.online.visa=EN,UN,KE,ZK,MN,ZM,GF,TF,EV
+      card_list.defbank.karta_debet.fdp.online.mastercard=F1,DM,PM
+      card_list.defbank.karta_kredyt.fdp.online.visa=
+      card_list.defbank.karta_kredyt.fdp.online.mastercard=CR
+
+      #Kody produktów kartowych do trybu offline FDP
+      card_list.defbank.karta_debet.fdp.offline=W1,W2,W3,W4,UV,ZV,OV,AV,RV,F2,F3,F4,MF,UF,OM,AM,GV,TV,BV,PV,SV,CN,BN,R1,R2,R3,R4,R5,R6,J1,J2,J3,J4,J5,J6,A1,A2,A3,A4,A5,A6,S1,S2,S3,S4,S5,S6,FB,FP,FG,FF,FS,FA,FR
+      card_list.defbank.karta_kredyt.fdp.offline=KL,KR,KU,CL,CU,CS,KS
+
+      #zależności limitów kartowych
+      card_list.defbank.karta_debet.fdp.dependencies=B24_WDL_LMT:B24_OFFL_WDL_LMT,POS_WDL_LMT:POS_OFFL_WDL_LMT,TTL_EC_PUR_WDL_LMT:OFFL_EC_PUR_WDL_LMT,ATM_WDL_LMT:ATM_OFFL_WDL_LMT,TTL_EC_PUR_WDL_LMT:TTL_MOTO_PUR_WDL_LMT,TTL_EC_PUR_WDL_LMT:OFFL_MOTO_PUR_WDL_LMT,TTL_EC_PUR_WDL_LMT:OFFL_EC_PUR_WDL_LMT,EC_USE_LMT:MOTO_USE_LMT
+      card_list.defbank.karta_kredyt.fdp.dependencies=B24_CCA_LMT:B24_OFFL_CCA_LMT,B24_CCA_LMT:POS_CCA_LMT,B24_CCA_LMT:POS_OFFL_CCA_LMT,B24_CCA_LMT:ATM_CCA_LMT,B24_CCA_LMT:ATM_OFFL_CCA_LMT,POS_USE_LMT:MOTO_USE_LMT,POS_USE_LMT:EC_USE_LMT
