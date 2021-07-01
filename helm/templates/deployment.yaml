@@ -38,5 +38,4 @@ spec:
       labels:
         app: website
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
         {{- toYaml .Values.secret | nindent 8 }}
